@@ -27,7 +27,7 @@ class FileController extends Controller
 
                 '<td>'.$data->original_file_name.'</td>'.
     
-                '<td>'.'<a href="storage/'.$data->file_url.'" target="_blank">Download</a>'.'</td>'.
+                '<td>'.'<a href="'.$data->file_url.'" target="_blank">Download</a>'.'</td>'.
     
                 '</tr>';
             }
