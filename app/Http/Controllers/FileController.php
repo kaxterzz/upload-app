@@ -27,8 +27,9 @@ class FileController extends Controller
 
                 '<td>'.$data->original_file_name.'</td>'.
     
-                '<td>'.'<a href="'.$data->file_url.'" target="_blank">Download</a>'.'</td>'.
-    
+                '<td>'.'<a href="download/'.$data->original_file_name.'" target="_blank">Download</a>'.'</td>'.
+                //'<td>'.'<a href="{{ asset(storage/'.$data->file_url.') }}" target="_blank">Download</a>'.'</td>'.
+
                 '</tr>';
             }
             return response()->json(['alert'=>'success','res'=>$output]);
@@ -66,13 +67,24 @@ class FileController extends Controller
         $this->validator($request->all())->validate();
 
         $content = new Content;
-        
-        $file_name = $request->file('file')->getClientOriginalName();
 
-        $path = $request->file('file')->store('uploads');
+        $extension = $request->file('file')->getClientOriginalExtension();
+        $original_file_name = $request->file('file')->getClientOriginalName();
+
+        $filename = $original_file_name.'.'.$extension; 
+
+        $path = Storage::putFileAs(
+            'uploads', $request->file('file'), $original_file_name
+        );
+
+        //$path = Storage::disk('public')->putFileAs('uploads', $request->file('file'), $original_file_name);
+        
+        
+
+        //$path = $request->file('file')->store('uploads');
 
         $content->user_id = auth()->user()->id;
-        $content->original_file_name = $file_name;
+        $content->original_file_name = $original_file_name;
         $content->file_url = $path;
         $content->save();
 
