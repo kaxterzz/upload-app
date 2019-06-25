@@ -7,6 +7,8 @@ use App\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class FileController extends Controller
 {
@@ -18,8 +20,14 @@ class FileController extends Controller
     public function index()
     {   
         $uid = auth()->user()->id;
-        $files = Content::where('user_id', $uid)
+        $files = "";
+        if(auth()->user()->hasRole('user')){
+            $files = Content::all();
+        }else{
+            $files = Content::where('user_id', $uid)
                 ->get();
+        }
+        
         $output = "";
         if($files->count()){
             foreach ($files as $key => $data) {

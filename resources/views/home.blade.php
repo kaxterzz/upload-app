@@ -7,6 +7,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        @can('upload content', App\User::class)
         <div class="col-md-8">
             <form class="form-horizontal" action="{{ route('files.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -23,12 +24,15 @@
                 <!-- /.box-footer -->
               </form>
         </div>
+        @endcan
+        @can('view content', App\User::class)
         <div class="col-md-8"><br>
             <table class="table table-sm">
                 <tbody id="data">
                 </tbody>
             </table>  
         </div>
+        @endcan
     </div>
 </div>
 @endsection
