@@ -9,6 +9,7 @@ use App\OnimtaImage;
 use App\OnimtaCustomers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\UrlGenerator;
 
 class ImageController extends Controller
 {
@@ -43,7 +44,7 @@ class ImageController extends Controller
         file_put_contents($tmpFilePath, $image_data);
         $tmpFile=new File($tmpFilePath);
         File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
-        $path = base_path()."uploads/api-images/".$imageName;
+        $path = URL::to('/')."uploads/api-images/".$imageName;
 
         //$max_id = User::max('id');
         $image = new OnimtaImage;
