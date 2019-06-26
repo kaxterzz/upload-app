@@ -26,7 +26,13 @@ class HomeController extends Controller
     {
         // $admin = Role::create(['name' => 'admin']);
         // $u = Role::create(['name' => 'user']);
-        // $ru = Permission::create(['name' => 'register user']);
+        // $ru = Permission::create(['name' => 'view users']);
+        // $rs = Permission::create(['name' => 'delete users']);
+        // auth()->user()->givePermissionTo($ru);
+        // auth()->user()->givePermissionTo($rs);
+        // $ru->assignRole('admin');
+        // $rs->assignRole('admin');
+        //auth()->user()->removeRole('user');
         // $uc = Permission::create(['name' => 'upload content']);
         // $vc = Permission::create(['name' => 'view content']);
         // $admin->givePermissionTo($ru);

@@ -35,8 +35,11 @@ class FileController extends Controller
 
                 '<td>'.$data->original_file_name.'</td>'.
     
-                '<td>'.'<a href="download/'.$data->original_file_name.'" target="_blank">Download</a>'.'</td>'.
+                //'<td>'.'<a href="download/'.$data->original_file_name.'" target="_blank">Download</a>'.'</td>'.
                 //'<td>'.'<a href="{{ asset(storage/'.$data->file_url.') }}" target="_blank">Download</a>'.'</td>'.
+                
+                '<td>'.'<a href="javascript:void(0);" id="downLink" class="downLink">Download</a>'.'</td>'.
+                //'<td>'.'<button type="button" class="btn btn-primary btn-sm">Download</button>'.'</td>'.
 
                 '</tr>';
             }

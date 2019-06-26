@@ -58,6 +58,29 @@
             console.log(error);
         });
        }
+
+        $(document).on('click', 'a.downLink', function() {
+            var file_name = $(this).closest('tr').find('td:nth-child(1)').text();
+            downloadFile(file_name)
+        })
+
+       function downloadFile(file_name){
+        axios.post('save-download-info', {
+          fileName: file_name,
+        })
+        .then(function (response) {
+            console.log(response);
+            
+            if (response.data.alert==='success') {
+                window.location.href = 'download/'+file_name
+            } else {
+                console.log(response.data.msg);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+       }
   </script>
   {{-- <script type="text/javascript">
     Dropzone.options.adImageUpload = {

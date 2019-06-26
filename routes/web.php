@@ -19,7 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::post('save-download-info', 'FileOperationsController@save_download_info');
+
 Route::resource('files', 'FileController');
+
+Route::resource('users', 'UsersController');
 
 // Download Route
 Route::get('download/{filename}', function($filename)

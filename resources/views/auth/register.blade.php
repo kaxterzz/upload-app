@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('stylesheets')
+  <link href="{{ asset('css/dropzone.css')}}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.0/build/css/alertify.min.css"/>
+@endsection
 
 @section('content')
 <div class="container">
@@ -8,7 +12,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('users.store') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -92,4 +96,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('scripts')
+
+    @if(\Session::has('user-created'))
+    <script type="text/javascript">
+    alertify.success('Data Saved !', 'success', 10, function(){  console.log('success'); });
+    </script>
+    @endif
+
 @endsection
