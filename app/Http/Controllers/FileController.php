@@ -97,6 +97,7 @@ class FileController extends Controller
         $content->user_id = auth()->user()->id;
         $content->original_file_name = $original_file_name;
         $content->file_url = $path;
+        $content->source = "local";
         $content->save();
 
         return redirect()->back()->with('success', ['Data Saved']);
