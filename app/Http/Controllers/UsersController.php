@@ -111,6 +111,8 @@ class UsersController extends Controller
     public function destroy($user)
     {
         try {
+            $user_obj = User::find($user);
+            $user_obj->removeRole('user');
             $u = User::destroy($user);
 
             if($u){
