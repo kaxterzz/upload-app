@@ -5,6 +5,8 @@ use File;
 use Image;
 use App\Content;
 use App\User;
+use App\OnimtaImage;
+use App\OnimtaCustomers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -43,18 +45,18 @@ class ImageController extends Controller
         File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
         $path = "uploads/api-images/".$imageName;
 
-        $max_id = User::max('id');
-        $content = new Content;
-        $content->user_id = $max_id;
-        $content->original_file_name = $imageName;
-        $content->file_url = $path;
-        $content->source = "api";
-        $content->save();
+        //$max_id = User::max('id');
+        $image = new OnimtaImage;
+        $customer_id = OnimtaCustomers::max('idCustomer');
+        $image->Customer_idCustomer = $customer_id;
+        $image->Url = $path;
+        $image->Date_time = date('Y-m-d H:i:s');
+        $image->save();
 
-        if($content){
-            return response()->json('true');
+        if($image){
+            return response()->json(true);
         }else{
-            return response()->json('false');
+            return response()->json(false);
         }
     }
 
