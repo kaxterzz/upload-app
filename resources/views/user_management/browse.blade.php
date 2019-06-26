@@ -12,18 +12,18 @@
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">User Name</th>
-                            <th scope="col">Action</th>
+                            <th class="text-md-left" scope="col">#</th>
+                            <th class="text-md-center" scope="col">User Name</th>
+                            <th class="text-md-right" scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody id="usersTable">
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
+                                <td class="text-md-left">{{ $user->id }}</td>
+                                <td class="text-md-center">{{ $user->name }}</td>
                                 @can('delete users', App\User::class)
-                                    <td><a class="deleteLink" href="javascript:void(0);">
+                                    <td class="text-md-right"><a class="deleteLink" href="javascript:void(0);">
                                          {{ __('Delete') }}
                                         </a>
                                     </td>

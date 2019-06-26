@@ -40,7 +40,7 @@ class FileController extends Controller
                 
                 '<td class="text-md-right">'.'<a href="javascript:void(0);" id="downLink" class="downLink">Download</a>'.'</td>'.
                 //'<td>'.'<button type="button" class="btn btn-primary btn-sm">Download</button>'.'</td>'.
-
+                
                 '</tr>';
             }
             return response()->json(['alert'=>'success','res'=>$output]);
