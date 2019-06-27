@@ -54,9 +54,9 @@ class ImageController extends Controller
         $image->save();
 
         if($image){
-            return response()->json(true);
+            return response()->json(['status'=>true]);
         }else{
-            return response()->json(false);
+            return response()->json(['status'=>false]);
         }
     }
 
