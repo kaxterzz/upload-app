@@ -30,34 +30,39 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-
-        $file = $request->file;
-        $image_decode = base64_decode($file);
-        $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
-
-        $f = finfo_open();
-        $mime_type = finfo_buffer($f, $image_data, FILEINFO_MIME_TYPE);
-        $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
-
-        $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
-        file_put_contents($tmpFilePath, $image_data);
-        $tmpFile=new File($tmpFilePath);
-        File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
-        $path = url('/')."/uploads/api-images/".$imageName;
-
-        //$max_id = User::max('id');
-        $image = new OnimtaImage;
-        $customer_id = OnimtaCustomers::max('idCustomer');
-        $image->Customer_idCustomer = $customer_id;
-        $image->Url = $path;
-        $image->Date_time = date('Y-m-d H:i:s');
-        $image->save();
-
-        if($image){
-            return response()->json(['status'=>true]);
-        }else{
-            return response()->json(['status'=>false]);
+        try {
+            $file = $request->file;
+            $image_decode = base64_decode($file);
+            $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
+    
+            $f = finfo_open();
+            $mime_type = finfo_buffer($f, $image_data, FILEINFO_MIME_TYPE);
+            $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
+    
+            $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
+            file_put_contents($tmpFilePath, $image_data);
+            $tmpFile=new File($tmpFilePath);
+            File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
+            $path = url('/')."/uploads/api-images/".$imageName;
+    
+            //$max_id = User::max('id');
+            $image = new OnimtaImage;
+            $customer_id = OnimtaCustomers::max('idCustomer');
+            $image->Customer_idCustomer = $customer_id;
+            $image->Url = $path;
+            $image->Date_time = date('Y-m-d H:i:s');
+            $image->save();
+    
+            if($image){
+                return response()->json(['status'=>true]);
+            }else{
+                return response()->json(['status'=>false]);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['err'=>$th->getMessage()]);
         }
+
+       
     }
 
     /**
