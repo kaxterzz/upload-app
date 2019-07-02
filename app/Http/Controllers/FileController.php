@@ -20,6 +20,7 @@ class FileController extends Controller
     public function index()
     {   
         $uid = auth()->user()->id;
+        $user = auth()->user();
         $files = "";
         if(auth()->user()->hasRole('user')){
             $files = Content::all();
@@ -29,8 +30,13 @@ class FileController extends Controller
         }
         
         $output = "";
+        $remove_links = "";
         if($files->count()){
             foreach ($files as $key => $data) {
+                if($user->hasAnyRole(['super admin', 'admin'])){
+                    $remove_links = '<td>'.'<a href="javascript:void(0);" id="removeLink" class="removeLink">Remove</a>'.'</td>';
+                }
+
                 $output.='<tr>'.
 
                 '<td>'.$data->original_file_name.'</td>'.
@@ -40,6 +46,8 @@ class FileController extends Controller
                 
                 '<td class="text-md-right">'.'<a href="javascript:void(0);" id="downLink" class="downLink">Download</a>'.'</td>'.
                 //'<td>'.'<button type="button" class="btn btn-primary btn-sm">Download</button>'.'</td>'.
+                $remove_links.
+                
                 
                 '</tr>';
             }
@@ -143,8 +151,18 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Content $content)
+    public function destroy(Content $content,$file_name)
     {
-        //
+        try {
+            $uid = auth()->user()->id;
+            $rf = Content::where('user_id',$uid)->where('original_file_name',$file_name)->delete();
+            $df = unlink(public_path('storage/uploads/'.$file_name));
+
+            if($rf && $df){
+                return response()->json(['alert'=>'success']);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['msg'=>$th->getMessage()]);
+        }
     }
 }

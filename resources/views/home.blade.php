@@ -81,6 +81,28 @@
             console.log(error);
         });
        }
+
+       $(document).on('click', 'a.removeLink', function() {
+            var file_name = $(this).closest('tr').find('td:nth-child(1)').text();
+            removeFile(file_name)
+        })
+
+       function removeFile(file_name){
+        axios.delete(`files/${file_name}`)
+        .then(function (response) {
+            console.log(response);
+            
+            if (response.data.alert==='success') {
+                alertify.success('Removed Successfully !', 'success', 10, function(){  console.log('success'); });
+                location.reload();
+            } else {
+                console.log(response.data.msg);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+       }
   </script>
   {{-- <script type="text/javascript">
     Dropzone.options.adImageUpload = {
