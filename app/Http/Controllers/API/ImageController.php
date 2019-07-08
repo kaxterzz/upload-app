@@ -32,7 +32,7 @@ class ImageController extends Controller
     {
         try {
             $file = $request->file;
-            $file = $request->Username;
+            $Username = $request->Username;
             $image_decode = base64_decode($file);
             $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
     
