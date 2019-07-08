@@ -8,6 +8,7 @@ use App\User;
 use App\OnimtaImage;
 use App\OnimtaCustomers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 
 class ImageController extends Controller
@@ -33,20 +34,27 @@ class ImageController extends Controller
         try {
             $file = $request->file;
             $username = $request->Username;
-            $image_decode = base64_decode($file);
-            $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
+            // $image_decode = base64_decode($file);
+            // $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
     
-            $f = finfo_open();
-            $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
-            // $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
-            $imageName = "image-".time().'.png';
+            // $f = finfo_open();
+            // $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
+            // // $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
+            // $imageName = "image-".time().'.png';
 
-            $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
-            file_put_contents($tmpFilePath, $image_decode);
-            $tmpFile=new File($tmpFilePath);
-            File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
+            // $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
+            // file_put_contents($tmpFilePath, $image_decode);
+            // $tmpFile=new File($tmpFilePath);
+            // File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
+            $imageName = "image-".time().'.png'; 
             $path = url('/')."/uploads/api-images/".$imageName;
-    
+            
+            // $image = str_replace('data:image/png;base64,', '', $file);
+            // $image = str_replace(' ', '+', $image);
+            
+
+            Storage::disk('api-images')->put($imageName, base64_decode($file));
+
             //$max_id = User::max('id');
             $image = new OnimtaImage;
             $customer_id = OnimtaCustomers::max('idCustomer');
