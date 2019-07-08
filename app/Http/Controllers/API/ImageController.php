@@ -39,7 +39,7 @@ class ImageController extends Controller
             //$content = $request->all();
             //$base = $_POST["file"];
             $content = $request->all();
-            dd($content);
+            var_dump($content);
 
 
             //dd($content);
