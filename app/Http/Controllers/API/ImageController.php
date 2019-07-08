@@ -33,14 +33,14 @@ class ImageController extends Controller
     {
         try {
             //header('Content-Type: bitmap; charset=utf-8');
-            // if($_SERVER['REQUEST_METHOD']=='POST'){
+            if($_SERVER['REQUEST_METHOD']=='POST'){
  
-            //     $image = $_POST['file'];
-            //     echo $image;
+                $image = $_POST['image'];
+                echo $image;
             
-            // }
-            $img = $request->input('file');
-            echo $img;
+            }
+             $img = $request->input('file');
+            // echo $img;
             $username = $request->Username;
            // $image_decode = base64_decode($file);
             // $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
