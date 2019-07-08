@@ -38,8 +38,8 @@ class ImageController extends Controller
             //$request = Request::instance();
             $content = $request->all();
             //$bodyContent = $request->getContent('file');
-            echo $content;
-            //echo $content['file'];
+            dd($content);
+            dd($content['file']);
 
              $img = $request->input('file');
             // echo $img;
