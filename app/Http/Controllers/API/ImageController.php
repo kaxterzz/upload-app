@@ -34,15 +34,15 @@ class ImageController extends Controller
             $file = $request->file;
             $username = $request->Username;
             $image_decode = base64_decode($file);
-            $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
+            //$image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
     
             $f = finfo_open();
-            $mime_type = finfo_buffer($f, $image_data, FILEINFO_MIME_TYPE);
+            $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
             // $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
             $imageName = "image-".time().'.png';
 
             $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
-            file_put_contents($tmpFilePath, $image_data);
+            file_put_contents($tmpFilePath, $image_decode);
             $tmpFile=new File($tmpFilePath);
             File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
             $path = url('/')."/uploads/api-images/".$imageName;
