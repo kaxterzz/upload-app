@@ -40,11 +40,11 @@ class ImageController extends Controller
             // $b = $_POST["image"];
             // echo $b;
 
-            $c = $request->file;
+            $c = $_POST["file"];
             echo $c;
 
-            $content = $request->image;
-            echo $content;
+            // $content = $request->image;
+            // echo $content;
             //var_dump($content);
 
 
