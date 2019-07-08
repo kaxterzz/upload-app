@@ -33,16 +33,16 @@ class ImageController extends Controller
     {
         try {
             //header('Content-Type: bitmap; charset=utf-8');
-            $m = $request->method();
-            echo $m;
+            // $m = Input::get('image');
+            // echo $m;
                 //echo $_POST;
             //$request = Request::instance();
-            $content = $request->getContent();
-            $b = $content["image"];
-            echo $b;
+            // $content = $request->getContent();
+            // $b = $content["image"];
+            // echo $b;
 
-            $r = file_get_contents('php://input');
-            echo $r['image'];
+            // $r = file_get_contents('php://input');
+            // echo $r['image'];
             // $c = $_POST["file"];
             // echo $c;
 
@@ -76,7 +76,7 @@ class ImageController extends Controller
             // $image = str_replace('data:image/png;base64,', '', $file);
             // $image = str_replace(' ', '+', $image);
             
-            $binary=base64_decode($img);
+            $binary=base64_decode($m);
             echo $binary;
             header('Content-Type: bitmap; charset=utf-8');
             $file = fopen(storage_path("app/public/api-images/".$imageName),'w');
