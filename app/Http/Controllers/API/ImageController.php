@@ -32,14 +32,15 @@ class ImageController extends Controller
     {
         try {
             $file = $request->file;
-            $Username = $request->Username;
+            $username = $request->Username;
             $image_decode = base64_decode($file);
             $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
     
             $f = finfo_open();
             $mime_type = finfo_buffer($f, $image_data, FILEINFO_MIME_TYPE);
-            $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
-    
+            // $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
+            $imageName = "image-".time().'.jpeg';
+
             $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
             file_put_contents($tmpFilePath, $image_data);
             $tmpFile=new File($tmpFilePath);
