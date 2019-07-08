@@ -32,27 +32,32 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         try {
-            header('Content-Type: bitmap; charset=utf-8');
-            $file = $request->file;
+            //header('Content-Type: bitmap; charset=utf-8');
+            $img = $request->file;
             $username = $request->Username;
-            $image_decode = base64_decode($file);
+           // $image_decode = base64_decode($file);
             // $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
     
             // $f = finfo_open();
             // $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
             // // $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
-            $imageName = "image-".time().'.png';
+            // $imageName = "image-".time().'.png';
 
-            $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
-            file_put_contents($tmpFilePath, $image_decode);
-            $tmpFile=new File($tmpFilePath);
-            File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
+            // $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
+            // file_put_contents($tmpFilePath, $image_decode);
+            // $tmpFile=new File($tmpFilePath);
+            // File::move($tmpFilePath, storage_path("app/public/api-images/$imageName"));
             $imageName = "image-".time().'.png'; 
             $path = url('/')."/uploads/api-images/".$imageName;
             
             // $image = str_replace('data:image/png;base64,', '', $file);
             // $image = str_replace(' ', '+', $image);
             
+            $binary=base64_decode($img);
+            header('Content-Type: bitmap; charset=utf-8');
+            $file = fopen(storage_path("app/public/api-images/".$imageName, 'w'));
+            fwrite($file, $binary);
+            fclose($file);
 
 
 
