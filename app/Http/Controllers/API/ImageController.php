@@ -36,13 +36,13 @@ class ImageController extends Controller
             
                 //echo $_POST;
             
-            $bodyContent = $request->getContent('file');
+            $bodyContent = $request->getContent('Username');
             echo $bodyContent;
 
              $img = $request->input('file');
             // echo $img;
             $username = $request->Username;
-           // $image_decode = base64_decode($file);
+            $image_decode = base64_decode($file);
             // $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $file));
     
             // $f = finfo_open();
