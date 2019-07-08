@@ -37,15 +37,17 @@ class ImageController extends Controller
             echo $m;
                 //echo $_POST;
             //$request = Request::instance();
-            //$content = $request->all();
-            // $b = $_POST["image"];
-            // echo $b;
+            $content = $request->getContent();
+            $b = $content["image"];
+            echo $b;
 
+            $r = file_get_contents('php://input');
+            echo $r['image'];
             // $c = $_POST["file"];
             // echo $c;
 
-            $content = $request->image;
-            echo $content;
+            // $content = $request->image;
+            // echo $content;
             //var_dump($content);
 
 
