@@ -55,7 +55,7 @@ class ImageController extends Controller
             
             $binary=base64_decode($img);
             header('Content-Type: bitmap; charset=utf-8');
-            $file = fopen(storage_path("app/public/api-images/".$imageName, 'w'));
+            $file = fopen(storage_path("app/public/api-images/".$imageName),'w');
             fwrite($file, $binary);
             fclose($file);
 
