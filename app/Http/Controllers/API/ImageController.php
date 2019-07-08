@@ -34,9 +34,11 @@ class ImageController extends Controller
         try {
             //header('Content-Type: bitmap; charset=utf-8');
             
-                echo $_POST;
+                //echo $_POST;
             
-            
+            $bodyContent = $request->getContent();
+            echo $bodyContent;
+
              $img = $request->input('file');
             // echo $img;
             $username = $request->Username;
