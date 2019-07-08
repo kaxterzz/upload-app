@@ -37,8 +37,14 @@ class ImageController extends Controller
                 //echo $_POST;
             //$request = Request::instance();
             //$content = $request->all();
-            //$base = $_POST["file"];
+            $b = $_POST["image"];
+            echo $b;
+
+            $c = $_POST["file"];
+            echo $c;
+
             $content = $request->image;
+            echo $content;
             //var_dump($content);
 
 
