@@ -37,7 +37,7 @@ class ImageController extends Controller
                 //echo $_POST;
             
             //$bodyContent = $request->getContent('Username');
-            $b = $request->get('file');
+            $b = $request->post('file');
             echo $b;
 
              //$img = $request->input('file');
