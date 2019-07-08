@@ -40,7 +40,7 @@ class ImageController extends Controller
             // $f = finfo_open();
             // $mime_type = finfo_buffer($f, $image_decode, FILEINFO_MIME_TYPE);
             // // $imageName = "image-".time().'.'.str_replace("image/","",$mime_type);
-            // $imageName = "image-".time().'.png';
+            $imageName = "image-".time().'.png';
 
             $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
             file_put_contents($tmpFilePath, $image_decode);
