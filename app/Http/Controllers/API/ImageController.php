@@ -33,12 +33,10 @@ class ImageController extends Controller
     {
         try {
             //header('Content-Type: bitmap; charset=utf-8');
-            if($_SERVER['REQUEST_METHOD']=='POST'){
- 
-                $image = $_POST['image'];
-                echo $image;
             
-            }
+                echo $_POST;
+            
+            
              $img = $request->input('file');
             // echo $img;
             $username = $request->Username;
