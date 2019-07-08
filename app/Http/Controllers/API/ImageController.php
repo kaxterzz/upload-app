@@ -32,6 +32,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         try {
+            header('Content-Type: bitmap; charset=utf-8');
             $file = $request->file;
             $username = $request->Username;
             $image_decode = base64_decode($file);
@@ -53,7 +54,7 @@ class ImageController extends Controller
             // $image = str_replace(' ', '+', $image);
             
 
-            //Storage::disk('api-images')->put($imageName, base64_decode($file));
+
 
             //$max_id = User::max('id');
             $image = new OnimtaImage;
