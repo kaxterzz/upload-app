@@ -51,6 +51,7 @@
                                     <option selected disabled>Choose...</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
+                                    <option value="customer">Customer</option>
                                 </select>
 
                                 @error('role')

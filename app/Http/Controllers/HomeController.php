@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         //Role::create(['name' => 'super admin']);
-        // $u = Role::create(['name' => 'user']);
+        $u = Role::create(['name' => 'customer']);
         //Permission::create(['name' => 'remove content']);
         //$ru->assignRole('admin');
         // $rs = Permission::create(['name' => 'delete users']);
@@ -39,7 +39,7 @@ class HomeController extends Controller
         // $admin->givePermissionTo($ru);
         // $admin->givePermissionTo($uc);
         // $admin->givePermissionTo($vc);
-        // $u->givePermissionTo($vc);
+        $u->givePermissionTo('view content');
         //$role = Role::findByName('admin');
         //$role->givePermissionTo('remove content');
         $permissions = auth()->user()->getPermissionsViaRoles();

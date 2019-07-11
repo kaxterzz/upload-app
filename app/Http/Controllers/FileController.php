@@ -24,6 +24,9 @@ class FileController extends Controller
         $files = "";
         if(auth()->user()->hasRole('user')){
             $files = Content::all();
+        }else if(auth()->user()->hasRole('customer')){
+            $files = Content::where('user_id', 17)
+                ->get();
         }else{
             $files = Content::where('user_id', $uid)
                 ->get();
