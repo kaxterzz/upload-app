@@ -159,7 +159,7 @@ class FileController extends Controller
         try {
             $uid = auth()->user()->id;
             $rf = Content::where('user_id',$uid)->where('original_file_name',$file_name)->delete();
-            $df = unlink(public_path('storage/app/uploads/'.$file_name));
+            $df = unlink(public_path('uploads/'.$file_name));
 
             if($rf && $df){
                 return response()->json(['alert'=>'success']);
