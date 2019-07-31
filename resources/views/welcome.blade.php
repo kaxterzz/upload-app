@@ -64,7 +64,7 @@
         </style>
     </head>
     <body>
-        <div class="col-sm-6 flex-center position-ref full-height">
+        <div class="col-sm-12 col-md-12 flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
