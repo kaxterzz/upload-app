@@ -45,7 +45,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 68px;
             }
 
             .links > a {
@@ -64,28 +64,32 @@
         </style>
     </head>
     <body>
-        <div class="col-sm-12 col-md-12 flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                    @endauth
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 flex-center position-ref full-height">
+                    @if (Route::has('login'))
+                        <div class="top-right links">
+                            @auth
+                                <a href="{{ url('/home') }}">Home</a>
+                            @else
+                                <a href="{{ route('login') }}">Login</a>
+                            @endauth
+                        </div>
+                    @endif
+                   
+                    <div class="content">
+                        <div class="title m-b-md" style="letter-spacing:5px;">
+                            ONIMTAIT
+                        </div>
+                        <div class="m-b-md" style="font-size:28px;">
+                            <p class="text-monospace"></p> file uploader
+                        </div>
+        
+                        {{-- <div class="col-md-6">
+                            <img src="{{asset('images/wall.png')}}" class="rounded mx-auto d-block img-fluid" alt="wall">
+                        </div> --}}
+                    </div>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md" style="letter-spacing:20px;">
-                    ONIMTAIT
-                </div>
-                <div class="m-b-md" style="font-size:28px;">
-                   <p class="text-monospace"></p> file uploader
-                </div>
-
-                {{-- <div class="col-md-6">
-                    <img src="{{asset('images/wall.png')}}" class="rounded mx-auto d-block img-fluid" alt="wall">
-                </div> --}}
             </div>
         </div>
     </body>
