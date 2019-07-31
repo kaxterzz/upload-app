@@ -30,18 +30,24 @@ Route::resource('users', 'UsersController');
 Route::get('download/{filename}', function($filename)
 {
     // Check if file exists in app/storage/file folder
+    $fextention = ".apk";
     $file_path = storage_path() .'/app/uploads/'. $filename;
     if (file_exists($file_path))
-    {
-        // // Send Download
-        // return Response::download($file_path, $filename, [
-        //     'Content-Length: '. filesize($file_path)
-        // ]);
-        return response()->file($file_path ,[
-            'Content-Length: '. filesize($file_path),
-            'Content-Type'=>'application/vnd.android.package-archive',
-            'Content-Disposition'=> 'attachment; filename='.$filename
-        ]);
+    {   
+
+        if(strpos($filename,$fextention) !== false) {
+            return response()->file($file_path ,[
+                'Content-Length: '. filesize($file_path),
+                'Content-Type'=>'application/vnd.android.package-archive',
+                'Content-Disposition'=> 'attachment; filename='.$filename
+            ]);
+        }else{
+            // Send Download
+            return Response::download($file_path, $filename, [
+                'Content-Length: '. filesize($file_path)
+            ]);
+        }
+        
     }
     else
     {
